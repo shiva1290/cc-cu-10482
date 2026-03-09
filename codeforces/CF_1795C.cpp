@@ -10,40 +10,7 @@ int main() {
     vector<long long> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
 
-
-
     vector<long long> cnt(n + 1, 0), bad(n + 1, 0);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     vector<long long> diff_cnt(n + 2, 0), diff_bad(n + 2, 0);
 
     for (int j = 0; j < n; j++) {
