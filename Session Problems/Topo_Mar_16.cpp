@@ -27,31 +27,28 @@ vector<int> dfstopoSort(int V, vector<int> adj[]) {
     return ans;
 }
 
-vector<int> bfstopoSort(int V, vector<int> adj[]) {
-    vector<int> ans;
-    vector<int> indegree(V, 0);
-
-    for (int i = 0; i < V; i++) {
-        for(auto it: adj[i]){
-            indegree[it]++;
+vector<int> bfstopoSort(int V, vector<int> adj[]){
+    vector<int>indegree(V,0);
+    queue<int>q;
+    vector<int>ans;
+    for(int i=0;i<V;i++){
+        for(auto a : adj[i]){
+            indegree[a]++;
         }
     }
-
-    queue<int> q;
-    for (int i = 0; i < V; i++) {
-        if(indegree[i] == 0){
-            q.push(i);
+    for(int i=0;i<V;i++){
+       if(indegree[i]==0){
+           q.push(i);
         }
     }
-
-    while (!q.empty()) {
-        int node = q.front();
+    while(!q.empty()){
+        int qNode=q.front();
         q.pop();
-        ans.push_back(node);
-        for(auto neighbours : adj[node]){
-            indegree[neighbours]--;
-            if(indegree[neighbours] == 0){
-                q.push(neighbours);
+        ans.push_back(qNode);
+        for(auto a : adj [qNode]){
+            indegree[a]--;
+            if(indegree[a]==0){
+                q.push(a);
             }
         }
     }
@@ -60,21 +57,14 @@ vector<int> bfstopoSort(int V, vector<int> adj[]) {
 
 int main(){
 
-    int V = 6;
-    vector<int> adj[6];
-    adj[1].push_back(0);
-    adj[1].push_back(2);
+    int V = 4;
+    vector<int> adj[4];
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(3);
     adj[2].push_back(3);
-    adj[3].push_back(5);
-    adj[4].push_back(5);
-    adj[4].push_back(0);
+    vector<int> dfsans = bfstopoSort(V, adj);
 
-    vector<int> bfsans = bfstopoSort(V, adj);
-    vector<int> dfsans = dfstopoSort(V, adj);
-
-    cout << "BFS (Kahn's): ";
-    for (auto it : bfsans) cout << it << " ";
-    cout << "\nDFS:          ";
     for (auto it : dfsans) cout << it << " ";
 
     return 0;
